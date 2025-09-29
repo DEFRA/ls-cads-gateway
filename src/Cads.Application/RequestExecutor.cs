@@ -1,0 +1,22 @@
+using Cads.Application.Commands;
+using Cads.Application.Queries;
+using MediatR;
+
+namespace Cads.Application;
+
+public class RequestExecutor(IMediator mediator) : IRequestExecutor
+{
+    private readonly IMediator _mediator = mediator;
+
+    // Executes a command with no tracked result
+    public async Task<TResponse> ExecuteCommand<TResponse>(ICommand<TResponse> command, CancellationToken cancellationToken = default)
+    {
+        return await _mediator.Send(command, cancellationToken);
+    }
+
+    // Executes a query (assumed to return plain TResponse)
+    public async Task<TResponse> ExecuteQuery<TResponse>(IQuery<TResponse> query, CancellationToken cancellationToken = default)
+    {
+        return await _mediator.Send(query, cancellationToken);
+    }
+}
