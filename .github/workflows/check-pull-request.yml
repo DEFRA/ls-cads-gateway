@@ -87,7 +87,7 @@ jobs:
       - name: Wait for cads_gateway to be ready
         run: ./working-dir/wait-for-docker-logs.sh cads_gateway "Now listening on" 60
       - name: Run integration tests
-        run: dotnet test ./working-dir/Cads.Gateway.sln --filter "Category=Integration"
+        run: dotnet test ./working-dir/Cads.Gateway.sln --filter Dependence=localstack
 
     ## SonarCloud
     ## Uncomment to unable SonarCloud scan
